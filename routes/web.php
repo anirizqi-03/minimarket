@@ -16,6 +16,3 @@ Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
 
-Route::get('/index', function () {
-    return view('index');
-});
