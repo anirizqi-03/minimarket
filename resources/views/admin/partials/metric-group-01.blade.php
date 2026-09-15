@@ -27,7 +27,7 @@
       <div>
         <span
           class="text-sm text-gray-500 dark:text-gray-400"
-          x-text="$t('ecommerce.metrics.customers')"
+          {{-- x-text="$t('ecommerce.metrics.customers')" --}}
         >
           Customers
         </span>
@@ -91,7 +91,7 @@
       <div>
         <span
           class="text-sm text-gray-500 dark:text-gray-400"
-          x-text="$t('ecommerce.metrics.orders')"
+          {{-- x-text="$t('ecommerce.metrics.orders')" --}}
         >
           Orders
         </span>

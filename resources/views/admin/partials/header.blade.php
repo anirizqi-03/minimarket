@@ -592,7 +592,7 @@
             <a
               href="#"
               class="text-theme-sm shadow-theme-xs mt-3 flex justify-center rounded-lg border border-gray-300 bg-white p-3 font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-800 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/3 dark:hover:text-gray-200"
-              x-text="$t('header.notifications.viewAll')"
+              {{-- x-text="$t('header.notifications.viewAll')" --}}
             >
               View All Notification
             </a>
@@ -683,9 +683,7 @@
                     fill=""
                   />
                 </svg>
-                <span x-text="$t('userDropdown.editProfile')"
-                  >Edit profile</span
-                >
+                <span>Edit profile</span>
               </a>
             </li>
             <li>
@@ -708,9 +706,7 @@
                     fill=""
                   />
                 </svg>
-                <span x-text="$t('userDropdown.accountSettings')"
-                  >Account settings</span
-                >
+                <span>Account settings</span>
               </a>
             </li>
             <li>
@@ -733,12 +729,12 @@
                     fill=""
                   />
                 </svg>
-                <span x-text="$t('userDropdown.support')">Support</span>
+               <span>Support</span>
               </a>
             </li>
 
             @include('admin.partials.language-dropdown')
-            
+
           </ul>
           <button
             class="group text-theme-sm mt-3 flex items-center gap-3 rounded-lg px-3 py-2 font-medium text-gray-700 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-white/5 dark:hover:text-gray-300"
@@ -759,7 +755,7 @@
               />
             </svg>
 
-            <span x-text="$t('userDropdown.signOut')">Sign out</span>
+            <span>Sign out</span>
           </button>
         </div>
         <!-- Dropdown End -->

@@ -10,9 +10,10 @@
     <title>
       @yield('title', 'Admin Dashboard')
     </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" />
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <link rel="stylesheet" href="{{ asset('admin/css/style.css') }}">
-    
+
   </head>
   <body
     x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': false, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
@@ -22,7 +23,7 @@
     :class="{'dark bg-gray-900': darkMode === true}"
   >
     <!-- ===== Preloader Start ===== -->
-    @include('admin.partials.preloader')
+    {{-- @include('admin.partials.preloader') --}}
     <!-- ===== Preloader End ===== -->
 
     <!-- ===== Page Wrapper Start ===== -->
@@ -49,8 +50,8 @@
             class="mx-auto max-w-(--breakpoint-2xl) p-4 pb-20 md:p-6 md:pb-6"
           >
             @yield('content')
-            <div class="grid grid-cols-12 gap-4 md:gap-6">
-              <div class="col-span-12 space-y-6 xl:col-span-7">
+            {{-- <div class="grid grid-cols-12 gap-4 md:gap-6">
+              {{-- <div class="col-span-12 space-y-6 xl:col-span-7">
                 <!-- Metric Group One -->
                 @include('admin.partials.metric-group-01')
                 <!-- Metric Group One -->
@@ -58,31 +59,31 @@
                 <!-- ====== Chart One Start -->
                 @include('admin.partials.chart-01')
                 <!-- ====== Chart One End -->
-              </div>
-              <div class="col-span-12 xl:col-span-5">
+              </div> --}}
+              {{-- <div class="col-span-12 xl:col-span-5">
                 <!-- ====== Chart Two Start -->
                 @include('admin.partials.chart-02')
                 <!-- ====== Chart Two End -->
-              </div>
+              </div> --}}
 
-              <div class="col-span-12">
+              {{-- <div class="col-span-12">
                 <!-- ====== Chart Three Start -->
                 @include('admin.partials.chart-03')
                 <!-- ====== Chart Three End -->
-              </div>
+              </div> --}}
 
-              <div class="col-span-12 xl:col-span-5">
+              {{-- <div class="col-span-12 xl:col-span-5">
                 <!-- ====== Map One Start -->
                 @include('admin.partials.map-01')
                 <!-- ====== Map One End -->
-              </div>
+              </div> --}}
 
-              <div class="col-span-12 xl:col-span-7">
+              {{-- <div class="col-span-12 xl:col-span-7">
                 <!-- ====== Table One Start -->
                 @include('admin.partials.table-01')
                 <!-- ====== Table One End -->
-              </div>
-            </div>
+              </div> --}}
+            </div> --}}
           </div>
         </main>
         <!-- ===== Main Content End ===== -->
@@ -90,5 +91,9 @@
       <!-- ===== Content Area End ===== -->
     </div>
     <!-- ===== Page Wrapper End ===== -->
+   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    {{-- <script src="{{ asset('admin/js/index.js') }}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsvectormap/dist/maps/world.js"></script>
   </body>
 </html>

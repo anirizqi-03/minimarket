@@ -12,7 +12,11 @@ Route::get('/login', function() {
 })->name('login');
 
 
+Route::post('c /login', function () {
+    return redirect()->route('admin.dashboard');
+})->name('login.store');
+
+
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->name('admin.dashboard');
-

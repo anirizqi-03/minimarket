@@ -10,10 +10,10 @@
   >
     <a href="index.html">
       <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-        <img class="dark:hidden" src="./images/logo/logo.svg" alt="Logo" />
+        <img class="dark:hidden" src="{{ asset('admin/images/logo/logo.svg') }}" alt="Logo" />
         <img
           class="hidden dark:block"
-          src="./images/logo/logo-dark.svg"
+          src="{{ asset('admin/images/logo/logo-dark.svg') }}"
           alt="Logo"
         />
       </span>
@@ -21,7 +21,7 @@
       <img
         class="logo-icon"
         :class="sidebarToggle ? 'lg:block' : 'hidden'"
-        src="./images/logo/logo-icon.svg"
+        src="{{ asset('admin/images/logo/logo-icon.svg') }}"
         alt="Logo"
       />
     </a>
@@ -39,7 +39,7 @@
           <span
             class="menu-group-title"
             :class="sidebarToggle ? 'xl:hidden' : ''"
-            x-text="$t('sidebar.groups.menu')"
+            {{-- x-text="$t('sidebar.groups.menu')" --}}
             >MENU</span
           >
 
@@ -89,7 +89,7 @@
               <span
                 class="menu-item-text"
                 :class="sidebarToggle ? 'xl:hidden' : ''"
-                x-text="$t('sidebar.items.dashboard')"
+                {{-- x-text="$t('sidebar.items.dashboard')" --}}
               >
                 Dashboard
               </span>
@@ -127,7 +127,7 @@
                     href="index.html"
                     class="menu-dropdown-item group"
                     :class="page === 'ecommerce' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.ecommerceHome')"
+                    {{-- x-text="$t('sidebar.items.ecommerceHome')" --}}
                   >
                     eCommerce
                   </a>
@@ -165,7 +165,7 @@
               <span
                 class="menu-item-text"
                 :class="sidebarToggle ? 'xl:hidden' : ''"
-                x-text="$t('sidebar.items.calendar')"
+                {{-- x-text="$t('sidebar.items.calendar')" --}}
               >
                 Calendar
               </span>
@@ -200,7 +200,7 @@
               <span
                 class="menu-item-text"
                 :class="sidebarToggle ? 'xl:hidden' : ''"
-                x-text="$t('sidebar.items.userProfile')"
+                {{-- x-text="$t('sidebar.items.userProfile')" --}}
               >
                 User Profile
               </span>
@@ -235,7 +235,7 @@
                <span
                 class="menu-item-text"
                 :class="sidebarToggle ? 'xl:hidden' : ''"
-                x-text="$t('sidebar.items.forms')"
+                {{-- x-text="$t('sidebar.items.forms')" --}}
               >
                 Forms
               </span>
@@ -273,7 +273,7 @@
                     href="form-elements.html"
                     class="menu-dropdown-item group"
                     :class="page === 'formElements' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.formElements')"
+                    {{-- x-text="$t('sidebar.items.formElements')" --}}
                   >
                     Form Elements
                   </a>
@@ -311,7 +311,7 @@
               <span
                 class="menu-item-text"
                 :class="sidebarToggle ? 'xl:hidden' : ''"
-                x-text="$t('sidebar.items.tables')"
+                {{-- x-text="$t('sidebar.items.tables')" --}}
               >
                 Tables
               </span>
@@ -349,7 +349,7 @@
                     href="basic-tables.html"
                     class="menu-dropdown-item group"
                     :class="page === 'basicTables' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.basicTables')"
+                    {{-- x-text="$t('sidebar.items.basicTables')" --}}
                   >
                     Basic Tables
                   </a>
@@ -387,7 +387,7 @@
               <span
                 class="menu-item-text"
                 :class="sidebarToggle ? 'xl:hidden' : ''"
-                x-text="$t('sidebar.items.pages')"
+                {{-- x-text="$t('sidebar.items.pages')" --}}
               >
                 Pages
               </span>
@@ -425,7 +425,7 @@
                     href="blank.html"
                     class="menu-dropdown-item group"
                     :class="page === 'blank' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.blankPage')"
+                    {{-- x-text="$t('sidebar.items.blankPage')" --}}
                   >
                     Blank Page
                   </a>
@@ -436,7 +436,7 @@
                     target="_blank"
                     class="menu-dropdown-item group"
                     :class="page === 'page404' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.error404')"
+                    {{-- x-text="$t('sidebar.items.error404')" --}}
                   >
                     404 Error
                   </a>
@@ -505,7 +505,7 @@
               <span
                 class="menu-item-text"
                 :class="sidebarToggle ? 'xl:hidden' : ''"
-                x-text="$t('sidebar.items.charts')"
+                {{-- x-text="$t('sidebar.items.charts')" --}}
               >
                 Charts
               </span>
@@ -543,7 +543,7 @@
                     href="line-chart.html"
                     class="menu-dropdown-item group"
                     :class="page === 'lineChart' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.lineChart')"
+                    {{-- x-text="$t('sidebar.items.lineChart')" --}}
                   >
                     Line Chart
                   </a>
@@ -553,7 +553,7 @@
                     href="bar-chart.html"
                     class="menu-dropdown-item group"
                     :class="page === 'barChart' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.barChart')"
+                    {{-- x-text="$t('sidebar.items.barChart')" --}}
                   >
                     Bar Chart
                   </a>
@@ -591,7 +591,7 @@
               <span
                 class="menu-item-text"
                 :class="sidebarToggle ? 'xl:hidden' : ''"
-                x-text="$t('sidebar.items.uiElements')"
+                {{-- x-text="$t('sidebar.items.uiElements')" --}}
               >
                 UI Elements
               </span>
@@ -629,7 +629,7 @@
                     href="alerts.html"
                     class="menu-dropdown-item group"
                     :class="page === 'alerts' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.alerts')"
+                    {{-- x-text="$t('sidebar.items.alerts')" --}}
                   >
                     Alerts
                   </a>
@@ -639,7 +639,7 @@
                     href="avatars.html"
                     class="menu-dropdown-item group"
                     :class="page === 'avatars' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.avatar')"
+                    {{-- x-text="$t('sidebar.items.avatar')" --}}
                   >
                     Avatars
                   </a>
@@ -649,7 +649,7 @@
                     href="badge.html"
                     class="menu-dropdown-item group"
                     :class="page === 'badge' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.badge')"
+                    {{-- x-text="$t('sidebar.items.badge')" --}}
                   >
                     Badge
                   </a>
@@ -659,7 +659,7 @@
                     href="buttons.html"
                     class="menu-dropdown-item group"
                     :class="page === 'buttons' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.buttons')"
+                    {{-- x-text="$t('sidebar.items.buttons')" --}}
                   >
                     Buttons
                   </a>
@@ -669,7 +669,7 @@
                     href="images.html"
                     class="menu-dropdown-item group"
                     :class="page === 'images' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.images')"
+                    {{-- x-text="$t('sidebar.items.images')" --}}
                   >
                     Images
                   </a>
@@ -679,7 +679,7 @@
                     href="videos.html"
                     class="menu-dropdown-item group"
                     :class="page === 'videos' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.videos')"
+                    {{-- x-text="$t('sidebar.items.videos')" --}}
                   >
                     Videos
                   </a>
@@ -717,7 +717,7 @@
               <span
                 class="menu-item-text"
                 :class="sidebarToggle ? 'xl:hidden' : ''"
-                x-text="$t('sidebar.items.authentication')"
+                {{-- x-text="$t('sidebar.items.authentication')" --}}
               >
                 Authentication
               </span>
@@ -755,7 +755,7 @@
                     href="signin.html"
                     class="menu-dropdown-item group"
                     :class="page === 'signin' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.signIn')"
+                    {{-- x-text="$t('sidebar.items.signIn')" --}}
                   >
                     Sign In
                   </a>
@@ -765,7 +765,7 @@
                     href="signup.html"
                     class="menu-dropdown-item group"
                     :class="page === 'signup' ? 'menu-dropdown-item-active' : 'menu-dropdown-item-inactive'"
-                    x-text="$t('sidebar.items.signUp')"
+                    {{-- x-text="$t('sidebar.items.signUp')" --}}
                   >
                     Sign Up
                   </a>
@@ -787,13 +787,13 @@
       >
         <h3
           class="mb-2 font-semibold text-gray-900 dark:text-white"
-          x-text="$t('sidebar.widget.title')"
+          {{-- x-text="$t('sidebar.widget.title')" --}}
         >
           #1 Tailwind CSS Dashboard
         </h3>
         <p
           class="text-theme-sm mb-4 text-gray-500 dark:text-gray-400"
-          x-text="$t('sidebar.widget.description')"
+          {{-- x-text="$t('sidebar.widget.description')" --}}
         >
           Leading Tailwind CSS Admin Template with 500+ UI Component and Pages.
         </p>
@@ -802,7 +802,7 @@
           target="_blank"
           rel="nofollow"
           class="bg-brand-500 text-theme-sm hover:bg-brand-600 flex items-center justify-center rounded-lg p-3 font-medium text-white"
-          x-text="$t('sidebar.widget.purchasePlan')"
+          {{-- x-text="$t('sidebar.widget.purchasePlan')" --}}
         >
           Purchase Plan
         </a>
