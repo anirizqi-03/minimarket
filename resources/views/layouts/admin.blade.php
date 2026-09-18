@@ -11,7 +11,7 @@
       @yield('title', 'Admin Dashboard')
     </title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap/dist/css/jsvectormap.min.css" />
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js']);
 
 
   </head>
