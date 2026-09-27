@@ -1,13 +1,27 @@
 <?php
-
 namespace App\Models;
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Product extends Model
 {
     use HasFactory;
 
-    protected$fillable = ['category_id', 'name', 'sku', 'price', 'stock'];
+    protected $fillable = [
+    'name',
+    'category',
+    'description',
+    'price',
+    'stock',
+    'image',
+    'is_active',
+    ];
+
+    protected $casts = [
+    'price' => 'decimal:2',
+    'is_active' => 'boolean',
+    ];
 }
