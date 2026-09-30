@@ -13,7 +13,6 @@
 <form action="{{ route('login.post') }}" method="POST">
     @csrf
 
-    {{-- Email --}}
     <div class="form-group">
         <label class="form-label" for="email">Email <span class="required">*</span></label>
         <div class="input-wrap">
@@ -32,7 +31,7 @@
         @enderror
     </div>
 
-    {{-- Password --}}
+
     <div class="form-group">
         <label class="form-label" for="password">Password <span class="required">*</span></label>
         <div class="input-wrap">
@@ -52,7 +51,7 @@
         @enderror
     </div>
 
-    {{-- Remember & Forgot --}}
+
     <div class="form-check">
         <label class="form-check-label" for="remember">
             <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }} />
@@ -61,7 +60,6 @@
         <a href="#" class="link-primary">Lupa password?</a>
     </div>
 
-    {{-- Submit --}}
     <button type="submit" class="btn btn-primary">
         <i class="ti ti-login"></i>
         Login

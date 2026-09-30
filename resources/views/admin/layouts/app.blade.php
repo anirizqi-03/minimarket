@@ -7,10 +7,10 @@
 
 <body>
     <div class="app-shell">
-        @include('admin.partials.sidebar')   {{-- ← class .sidebar --}}
+        @include('admin.partials.sidebar')
 
         <div class="app-main">
-            @include('admin.partials.topbar')   {{-- ← class .topbar --}}
+            @include('admin.partials.topbar')   
 
             <main class="app-content">
                 @yield('content')

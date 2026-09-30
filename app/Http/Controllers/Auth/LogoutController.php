@@ -10,14 +10,12 @@ class LogoutController extends Controller
 {
     public function logout(Request $request)
     {
-        // Simpan role sebelum logout
         $role = Auth::user()->role ?? 'customer';
 
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        // Redirect sesuai role
         if (in_array($role, ['admin'])) {
             return redirect()
                 ->route('login')

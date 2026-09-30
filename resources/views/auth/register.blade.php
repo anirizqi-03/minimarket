@@ -51,7 +51,7 @@
     </div>
 
 
-    {{-- Password --}}
+
     <div class="form-group">
         <label class="form-label" for="password">Password <span class="required">*</span></label>
         <div class="input-wrap">
@@ -71,7 +71,7 @@
         @enderror
     </div>
 
-    {{-- Confirm Password --}}
+
     <div class="form-group">
         <label class="form-label" for="password_confirmation">Konfirmasi Password <span class="required">*</span></label>
         <div class="input-wrap">
@@ -88,7 +88,7 @@
         </div>
     </div>
 
-    {{-- Submit --}}
+   
     <button type="submit" class="btn btn-primary" style="margin-top: 8px;">
         <i class="ti ti-user-plus"></i>
         Daftar Sekarang

@@ -908,6 +908,464 @@ textarea.form-control { resize: vertical; min-height: 90px; }
 .text-bold { font-weight: 700; }
 .text-right { text-align: right; }
 .text-center { text-align: center; }
+
+
+
+/* ============================================
+   KASIR / POS
+============================================ */
+.pos-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 16px;
+    align-items: start;
+}
+
+@media (max-width: 1100px) {
+    .pos-wrapper { grid-template-columns: 1fr; }
+}
+
+/* Store Info */
+.pos-store-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 12px;
+}
+
+.pos-store-name {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--text);
+    margin: 0 0 4px;
+    letter-spacing: 0.02em;
+}
+
+.pos-store-addr {
+    font-size: 12.5px;
+    color: var(--text-3);
+    margin: 0;
+}
+
+.pos-trx-code {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 4px;
+    font-family: 'Courier New', monospace;
+}
+
+.pos-trx-date {
+    font-size: 12.5px;
+    color: var(--text-3);
+    margin: 0;
+}
+
+/* Section */
+.pos-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+}
+
+.pos-section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.pos-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.pos-hint {
+    font-size: 11px;
+    color: var(--text-4);
+    font-family: 'Courier New', monospace;
+}
+
+/* Search */
+.pos-search-wrap { position: relative; margin-bottom: 14px; }
+
+.pos-search-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    outline: none;
+    font-family: 'Courier New', monospace;
+    background: #f0fdf4;
+    transition: all 0.15s;
+}
+
+.pos-search-input:focus {
+    box-shadow: 0 0 0 4px rgba(10, 173, 10, 0.15);
+}
+
+.pos-search-results {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    max-height: 280px;
+    overflow-y: auto;
+    z-index: 100;
+    display: none;
+}
+
+.pos-search-results.show { display: block; }
+
+.pos-search-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-soft);
+    transition: background 0.1s;
+}
+
+.pos-search-item:last-child { border-bottom: none; }
+.pos-search-item:hover { background: var(--primary-light); }
+
+.pos-search-name {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+}
+
+.pos-search-meta {
+    font-size: 11.5px;
+    color: var(--text-3);
+}
+
+.pos-search-price {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--primary);
+    font-family: 'Courier New', monospace;
+}
+
+.pos-search-empty {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-3);
+    font-size: 13px;
+}
+
+/* Fields */
+.pos-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.pos-field { display: flex; flex-direction: column; gap: 6px; }
+
+.pos-label {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.pos-input {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13.5px;
+    outline: none;
+    font-family: inherit;
+    background: var(--surface);
+    transition: all 0.15s;
+}
+
+.pos-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(10, 173, 10, 0.12);
+}
+
+.pos-input--sm { padding: 6px 10px; font-size: 12.5px; text-align: right; width: 100px; }
+.pos-input--lg { padding: 14px 16px; font-size: 18px; font-weight: 700; font-family: 'Courier New', monospace; text-align: right; }
+
+/* Cart Table */
+.pos-cart-table-wrap {
+    max-height: 380px;
+    overflow-y: auto;
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+}
+
+.pos-cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+}
+
+.pos-cart-table thead th {
+    background: var(--surface-2);
+    padding: 10px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text-3);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    letter-spacing: 0.04em;
+}
+
+.pos-cart-table tbody td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-soft);
+    vertical-align: middle;
+}
+
+.pos-cart-table tbody tr:last-child td { border-bottom: none; }
+.pos-cart-table tbody tr:hover { background: var(--surface-2); }
+
+.pos-cart-name {
+    font-weight: 600;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+}
+
+.pos-qty-ctrl {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: var(--surface-3);
+    border-radius: 6px;
+    padding: 2px;
+}
+
+.pos-qty-ctrl button {
+    width: 22px;
+    height: 22px;
+    border-radius: 4px;
+    background: white;
+    color: var(--text);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pos-qty-ctrl button:hover { background: var(--primary); color: white; }
+
+.pos-qty-ctrl span {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.pos-remove-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--text-3);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: none;
+}
+
+.pos-remove-btn:hover { background: var(--red-soft); color: var(--red); }
+
+/* Summary */
+.pos-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pos-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: var(--text-2);
+    font-family: 'Courier New', monospace;
+}
+
+.pos-summary-row strong {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.pos-summary-row--input { align-items: center; }
+
+.pos-input-inline {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.pos-input-suffix {
+    font-size: 12px;
+    color: var(--text-3);
+}
+
+.pos-summary-row--total {
+    padding: 12px 0;
+    border-top: 2px dashed var(--border);
+    border-bottom: 2px dashed var(--border);
+    margin: 8px 0;
+    font-size: 15px;
+}
+
+.pos-summary-row--total strong {
+    font-size: 18px;
+    color: var(--primary);
+}
+
+.pos-summary-label {
+    font-size: 11.5px;
+    font-weight: 700;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+}
+
+/* Payment Methods */
+.pos-payment-methods {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.pos-pay-btn {
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    color: var(--text-2);
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+
+.pos-pay-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+.pos-pay-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Change */
+.pos-change {
+    padding: 12px 16px;
+    background: var(--primary-light);
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    text-align: right;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 12px;
+}
+
+/* Actions */
+.pos-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+
+
+.pos-btn {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+    border: 1.5px solid transparent;
+    font-family: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.pos-btn--ghost {
+    background: transparent;
+    color: var(--text-2);
+    border-color: var(--border);
+}
+
+.pos-btn--ghost1 {
+    background:rgb(255, 255, 137);
+}
+
+.pos-btn--ghost2 {
+    background:rgba(255, 100, 100, 0.945);
+}
+
+.pos-btn--ghost:hover {
+    background: var(--surface-3);
+    color: var(--text);
+}
+
+.pos-btn--primary {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    padding: 14px 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pos-btn--primary:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 4px 12px rgba(10, 173, 10, 0.3);
+}
+
+.pos-btn--primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.pos-btn--primary i { font-size: 18px; }
+
+
 </style>
 
 <title>@yield('title', 'Admin Dashboard') — Minimarket</title>
+
+

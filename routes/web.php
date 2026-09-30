@@ -5,7 +5,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Admin\ProductController;
-
+use App\Http\Controllers\Admin\KasirController;
+use App\Http\Controllers\Admin\TransactionController;
 
 
 
@@ -42,7 +43,24 @@ Route::middleware('auth')->group(function (){
     Route::resource('products', ProductController::class);
 
 
+    //Bagian Kasir
+    Route::prefix('kasir')->name('kasir.')->group(function () {
+        Route::get('/', [KasirController::class, 'index'])->name('index');
+        Route::get('/search-product', [KasirController::class, 'searchProduct'])->name('search');
+        Route::post('/store', [KasirController::class, 'store'])->name('store');
+        Route::get('/receipt/{transaction}', [KasirController::class, 'receipt'])->name('receipt');
+        });
+
+
+    //riwayat transaksi
+     Route::prefix('transaksi')->name('transaksi.')->group(function () {
+        Route::get('/', [TransactionController::class, 'index'])->name('index');
+        Route::get('/{transaction}', [TransactionController::class, 'show'])->name('show');
+        Route::delete('/{transaction}', [TransactionController::class, 'destroy'])->name('destroy');
+        });
+
     });
+
 
 });
 

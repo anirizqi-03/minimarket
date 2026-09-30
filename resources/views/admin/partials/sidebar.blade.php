@@ -13,7 +13,7 @@
                 'label' => 'Produk',
                 'icon'  => 'ti-shopping-bag',
                 'href'  => route('admin.products.index'),
-                'route' => 'admin.products',        
+                'route' => 'admin.products',
             ],
             [
                 'label' => 'Kategori Produk',
@@ -42,9 +42,15 @@
         ],
         'Transaksi' => [
             [
+                'label' => 'Kasir',
+                'icon'  => 'ti-cash',
+                'href'  => route('admin.kasir.index'),
+                'route' => 'admin.kasir',
+            ],
+            [
                 'label' => 'Riwayat Transaksi',
                 'icon'  => 'ti-receipt',
-                'href'  => '#',
+                'href'  => route('admin.transaksi.index'),
                 'badge' => '5',
                 'route' => 'admin.transactions',
             ],
