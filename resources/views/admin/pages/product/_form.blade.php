@@ -7,7 +7,7 @@
     - $button  (label tombol submit)
 --}}
 
-<form action="{{ $action }}" method="POST" id="formProduk">
+<form action="{{ $action }}" method="POST" id="formProduk" enctype="multipart/form-data">
     @csrf
     @if(($method ?? 'POST') !== 'POST')
         @method($method)
@@ -101,13 +101,14 @@
     </div>
 
     <div class="form-group">
-        <label class="form-label">Path Gambar Produk</label>
-        <input type="text"
-               name="image"
-               class="form-control"
-               value="{{ old('image', $product->image ?? '') }}"
-               placeholder="Mis: /images/products/beras.jpg" />
-        <span class="form-hint">Kosongkan jika tidak ada gambar</span>
+        <label class="form-label">Gambar Produk</label>
+        @if(isset($product) && $product->image)
+            <div style="margin-bottom: 10px;">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="Preview" style="max-height: 100px; border-radius: 8px;">
+            </div>
+        @endif
+        <input type="file" name="image" class="form-control" accept="image/*">
+        <span class="form-hint">Format: JPG, PNG. Max: 2MB</span>
     </div>
 
     <div class="form-group" style="margin-bottom: 0;">

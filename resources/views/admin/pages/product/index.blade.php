@@ -125,6 +125,7 @@
                     <th class="text-right">Harga</th>
                     <th class="text-center">Stok</th>
                     <th class="text-center">Status</th>
+                    <th class="text-center" style="width: 160px;">Gambar</th>
                     <th class="text-center" style="width: 160px;">Aksi</th>
                 </tr>
             </thead>
@@ -133,11 +134,11 @@
                     @php
                         // Status stok
                         if ($product->stock <= 0) {
-                            $status = 'Habis';       $badge = 'danger';
+                            $status = 'Habis';        $badge = 'danger';
                         } elseif ($product->stock <= 10) {
                             $status = 'Stok Menipis'; $badge = 'warning';
                         } else {
-                            $status = 'Tersedia';    $badge = 'success';
+                            $status = 'Tersedia';     $badge = 'success';
                         }
 
                         // Warna avatar cycling
@@ -155,13 +156,13 @@
                                 <div style="min-width: 0;">
                                     <strong style="display: block; color: var(--text);">{{ $product->name }}</strong>
                                     <span style="font-size: 11.5px; color: var(--text-3);">
-                                        SKU: PRD-{{ str_pad($product->id, 3, '0', STR_PAD_LEFT) }}
+                                        SKU: {{ $product->sku ?? 'PRD-' . str_pad($product->id, 3, '0', STR_PAD_LEFT) }}
                                     </span>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <span class="badge badge--gray">{{ $product->category ?? '—' }}</span>
+                            <span class="badge badge--gray">{{ $product->category->name ?? '—' }}</span>
                         </td>
                         <td class="text-right">
                             <strong>Rp {{ number_format($product->price, 0, ',', '.') }}</strong>
@@ -172,6 +173,25 @@
                         <td class="text-center">
                             <span class="badge badge--{{ $badge }}">{{ $status }}</span>
                         </td>
+
+                        {{-- Gambar --}}
+                        <td>
+                            <div class="flex items-center gap-3">
+                                @if($product->image)
+                                    <img src="{{ asset('storage/' . $product->image) }}" alt="Gambar" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">
+                                @else
+                                    <div class="avatar avatar--{{ $color }}">
+                                        <i class="ti ti-shopping-bag"></i>
+                                    </div>
+                                @endif
+                                <div style="min-width: 0;">
+                                    <strong style="display: block; color: var(--text);">{{ $product->name }}</strong>
+                                    <span style="font-size: 11.5px; color: var(--text-3);">SKU: PRD-{{ str_pad($product->id, 3, '0', STR_PAD_LEFT) }}</span>
+                                </div>
+                            </div>
+                        </td>
+
+                        {{-- Aksi --}}
                         <td class="text-center">
                             <div class="flex items-center justify-center gap-2">
 
@@ -209,7 +229,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7">
+                        <td colspan="8">
                             <div class="empty-state">
                                 <div class="icon">📦</div>
                                 <strong>Belum Ada Produk</strong>
@@ -247,19 +267,11 @@
                 @endif
 
                 {{-- Page numbers --}}
-                @foreach($products->links()->elements as $element)
-                    @if(is_string($element))
-                        <span class="page-btn" style="cursor: default;">{{ $element }}</span>
-                    @endif
-
-                    @if(is_array($element))
-                        @foreach($element as $page => $url)
-                            @if($page == $products->currentPage())
-                                <button class="page-btn active">{{ $page }}</button>
-                            @else
-                                <a href="{{ $url }}" class="page-btn">{{ $page }}</a>
-                            @endif
-                        @endforeach
+                @foreach($products->getUrlRange(1, $products->lastPage()) as $page => $url)
+                    @if($page == $products->currentPage())
+                        <button class="page-btn active">{{ $page }}</button>
+                    @else
+                        <a href="{{ $url }}" class="page-btn">{{ $page }}</a>
                     @endif
                 @endforeach
 
