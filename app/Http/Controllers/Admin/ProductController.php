@@ -70,7 +70,7 @@ class ProductController extends Controller
         return view('admin.pages.product.edit', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+        public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
             'name'        => 'required|string|max:255',
@@ -84,6 +84,13 @@ class ProductController extends Controller
 
         $validated['is_active'] = $request->boolean('is_active');
 
+         if ($request->input('remove_image') == '1') {
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+            $validated['image'] = null;
+        }
+
         if ($request->hasFile('image')) {
 
             if ($product->image && Storage::disk('public')->exists($product->image)) {
@@ -91,16 +98,8 @@ class ProductController extends Controller
             }
 
             $file = $request->file('image');
-            $image = Image::decode($file);
-            $image->scale(width: 800);
-
-            $filename = Str::random(20) . '.' . $file->getClientOriginalExtension();
-            $path = 'products/' . $filename;
-
-            Storage::disk('public')->put(
-                $path,
-                $image->encodeUsingFileExtension($file->getClientOriginalExtension(), quality: 80)
-            );
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('products', $filename, 'public');
 
             $validated['image'] = $path;
         }

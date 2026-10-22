@@ -28,59 +28,36 @@
     </div>
 
     <div class="card-body">
+        {{-- 1. Form Update --}}
         @include('admin.pages.product._form', [
             'action' => route('admin.products.update', $product),
             'method' => 'PUT',
             'button' => 'Update Produk',
         ])
 
-        <div class="form-actions">
+        {{-- 2. Form Hapus (Diletakkan terpisah di bawah form update) --}}
+        <div style="margin-top: 24px; padding-top: 20px; border-top: 1px dashed var(--border);">
             <form action="{{ route('admin.products.destroy', $product) }}"
                   method="POST"
-                  onsubmit="return confirm('Yakin hapus produk ini?')"
-                  style="margin-right: auto;">
+                  onsubmit="return confirm('Yakin hapus produk ini?')">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-outline" style="color: var(--red); border-color: var(--red);">
-                    <i class="ti ti-trash"></i> Hapus
+                    <i class="ti ti-trash"></i> Hapus Produk
                 </button>
             </form>
-
-            <a href="{{ route('admin.products.index') }}" class="btn btn-outline">
-                <i class="ti ti-x"></i> Batal
-            </a>
-            <button type="submit" form="formProduk" class="btn btn-primary">
-                <i class="ti ti-device-floppy"></i> Update Produk
-            </button>
         </div>
     </div>
 </div>
 
 <style>
     .back-link {
-        width: 34px;
-        height: 34px;
-        border-radius: 8px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-2);
-        transition: all 0.15s;
+        width: 34px; height: 34px; border-radius: 8px;
+        background: var(--surface); border: 1px solid var(--border);
+        display: inline-flex; align-items: center; justify-content: center;
+        color: var(--text-2); transition: all 0.15s;
     }
-    .back-link:hover {
-        background: var(--surface-3);
-        color: var(--primary);
-    }
-    .form-actions {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-top: 24px;
-        padding-top: 20px;
-        border-top: 1px solid var(--border-soft);
-    }
+    .back-link:hover { background: var(--surface-3); color: var(--primary); }
 </style>
 
 @endsection

@@ -37,9 +37,6 @@
             <a href="{{ route('admin.products.index') }}" class="btn btn-outline">
                 <i class="ti ti-x"></i> Batal
             </a>
-            <button type="submit" form="formProduk" class="btn btn-primary">
-                <i class="ti ti-device-floppy"></i> Simpan Produk
-            </button>
         </div>
     </div>
 </div>

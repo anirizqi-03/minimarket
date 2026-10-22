@@ -125,126 +125,97 @@
                     <th class="text-right">Harga</th>
                     <th class="text-center">Stok</th>
                     <th class="text-center">Status</th>
-                    <th class="text-center" style="width: 160px;">Gambar</th>
+                    <th class="text-center">Gambar</th>
                     <th class="text-center" style="width: 160px;">Aksi</th>
                 </tr>
             </thead>
-            <tbody>
-                @forelse($products as $product)
-                    @php
-                        // Status stok
-                        if ($product->stock <= 0) {
-                            $status = 'Habis';        $badge = 'danger';
-                        } elseif ($product->stock <= 10) {
-                            $status = 'Stok Menipis'; $badge = 'warning';
-                        } else {
-                            $status = 'Tersedia';     $badge = 'success';
-                        }
+    <tbody>
+        @forelse($products as $product)
+            @php
+                // Status stok
+                if ($product->stock <= 0) {
+                    $status = 'Habis';        $badge = 'danger';
+                } elseif ($product->stock <= 10) {
+                    $status = 'Stok Menipis'; $badge = 'warning';
+                } else {
+                    $status = 'Tersedia';     $badge = 'success';
+                }
+            @endphp
 
-                        // Warna avatar cycling
-                        $colors = ['green', 'blue', 'orange', 'purple', 'teal', 'indigo', 'red', 'yellow'];
-                        $color  = $colors[$product->id % count($colors)];
-                    @endphp
+            <tr>
+                <td><input type="checkbox" /></td>
 
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td>
-                            <div class="flex items-center gap-3">
-                                <div class="avatar avatar--{{ $color }}">
-                                    <i class="ti ti-shopping-bag"></i>
-                                </div>
-                                <div style="min-width: 0;">
-                                    <strong style="display: block; color: var(--text);">{{ $product->name }}</strong>
-                                    <span style="font-size: 11.5px; color: var(--text-3);">
-                                        SKU: {{ $product->sku ?? 'PRD-' . str_pad($product->id, 3, '0', STR_PAD_LEFT) }}
-                                    </span>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="badge badge--gray">{{ $product->category->name ?? '—' }}</span>
-                        </td>
-                        <td class="text-right">
-                            <strong>Rp {{ number_format($product->price, 0, ',', '.') }}</strong>
-                        </td>
-                        <td class="text-center">
-                            <strong>{{ $product->stock }}</strong>
-                        </td>
-                        <td class="text-center">
-                            <span class="badge badge--{{ $badge }}">{{ $status }}</span>
-                        </td>
+                {{-- 1. Nama & SKU --}}
+                <td>
+                    <strong style="display: block; color: var(--text);">{{ $product->name }}</strong>
+                    <span style="font-size: 11.5px; color: var(--text-3);">
+                        SKU: {{ $product->sku ?? 'PRD-' . str_pad($product->id, 3, '0', STR_PAD_LEFT) }}
+                    </span>
+                </td>
 
-                        {{-- Gambar --}}
-                        <td>
-                            <div class="flex items-center gap-3">
-                                @if($product->image)
-                                    <img src="{{ asset('storage/' . $product->image) }}" alt="Gambar" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">
-                                @else
-                                    <div class="avatar avatar--{{ $color }}">
-                                        <i class="ti ti-shopping-bag"></i>
-                                    </div>
-                                @endif
-                                <div style="min-width: 0;">
-                                    <strong style="display: block; color: var(--text);">{{ $product->name }}</strong>
-                                    <span style="font-size: 11.5px; color: var(--text-3);">SKU: PRD-{{ str_pad($product->id, 3, '0', STR_PAD_LEFT) }}</span>
-                                </div>
-                            </div>
-                        </td>
+                {{-- 2. Kategori (Diperbaiki jadi string biasa) --}}
+                <td>
+                    <span class="badge badge--gray">{{ $product->category ?? '—' }}</span>
+                </td>
 
-                        {{-- Aksi --}}
-                        <td class="text-center">
-                            <div class="flex items-center justify-center gap-2">
+                {{-- 3. Harga --}}
+                <td class="text-right">
+                    <strong>Rp {{ number_format($product->price, 0, ',', '.') }}</strong>
+                </td>
 
-                                {{-- Show --}}
-                                <a href="{{ route('admin.products.show', $product) }}"
-                                   class="btn btn-outline btn-sm btn-icon"
-                                   title="Detail">
-                                    <i class="ti ti-eye"></i>
-                                </a>
+                {{-- 4. Stok --}}
+                <td class="text-center">
+                    <strong>{{ $product->stock }}</strong>
+                </td>
 
-                                {{-- Edit --}}
-                                <a href="{{ route('admin.products.edit', $product) }}"
-                                   class="btn btn-outline btn-sm btn-icon"
-                                   title="Edit">
-                                    <i class="ti ti-pencil"></i>
-                                </a>
+                {{-- 5. Status --}}
+                <td class="text-center">
+                    <span class="badge badge--{{ $badge }}">{{ $status }}</span>
+                </td>
 
-                                {{-- Delete --}}
-                                <form action="{{ route('admin.products.destroy', $product) }}"
-                                      method="POST"
-                                      onsubmit="return confirm('Yakin hapus produk {{ $product->name }}?')"
-                                      style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit"
-                                            class="btn btn-outline btn-sm btn-icon"
-                                            title="Hapus"
-                                            style="color: var(--red);">
-                                        <i class="ti ti-trash"></i>
-                                    </button>
-                                </form>
+                {{-- 6. Gambar (HANYA TAMPILKAN GAMBAR, TANPA TEKS) --}}
+                <td class="text-center">
+                    @if($product->image)
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="Gambar" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px; display: block; margin: 0 auto;">
+                    @else
+                        <div class="avatar avatar--green" style="margin: 0 auto;">
+                            <i class="ti ti-shopping-bag"></i>
+                        </div>
+                    @endif
+                </td>
 
-                            </div>
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="8">
-                            <div class="empty-state">
-                                <div class="icon">📦</div>
-                                <strong>Belum Ada Produk</strong>
-                                <p>Silakan tambahkan produk pertama Anda.</p>
-                                <a href="{{ route('admin.products.create') }}"
-                                   class="btn btn-primary"
-                                   style="margin-top: 16px; display: inline-flex;">
-                                    <i class="ti ti-plus"></i> Tambah Produk
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                {{-- 7. Aksi --}}
+                <td class="text-center">
+                    <div class="flex items-center justify-center gap-2">
+                        <a href="{{ route('admin.products.show', $product) }}" class="btn btn-outline btn-sm btn-icon" title="Detail">
+                            <i class="ti ti-eye"></i>
+                        </a>
+                        <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-outline btn-sm btn-icon" title="Edit">
+                            <i class="ti ti-pencil"></i>
+                        </a>
+                        <form action="{{ route('admin.products.destroy', $product) }}" method="POST" onsubmit="return confirm('Yakin hapus produk {{ $product->name }}?')" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-outline btn-sm btn-icon" title="Hapus" style="color: var(--red);">
+                                <i class="ti ti-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="8">
+                    <div class="empty-state">
+                        <div class="icon">📦</div>
+                        <strong>Belum Ada Produk</strong>
+                        <p>Silakan tambahkan produk pertama Anda.</p>
+                    </div>
+                </td>
+            </tr>
+        @endforelse
+    </tbody>
+</table>
     </div>
 
     {{-- PAGINATION --}}

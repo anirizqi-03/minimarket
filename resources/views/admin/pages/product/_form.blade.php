@@ -1,12 +1,3 @@
-{{--
-    Partial Form — dipakai oleh create.blade.php & edit.blade.php
-    Variable yang dibutuhkan:
-    - $product (optional, untuk edit)
-    - $action  (URL action)
-    - $method  (POST / PUT)
-    - $button  (label tombol submit)
---}}
-
 <form action="{{ $action }}" method="POST" id="formProduk" enctype="multipart/form-data">
     @csrf
     @if(($method ?? 'POST') !== 'POST')
@@ -18,38 +9,21 @@
 
     <div class="form-group">
         <label class="form-label">Nama Produk <span class="required">*</span></label>
-        <input type="text"
-               name="name"
-               class="form-control @error('name') is-invalid @enderror"
-               value="{{ old('name', $product->name ?? '') }}"
-               placeholder="Mis: Beras Premium 5kg"
-               required />
-        @error('name')
-            <span class="form-error">{{ $message }}</span>
-        @enderror
+        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+               value="{{ old('name', $product->name ?? '') }}" placeholder="Mis: Beras Premium 5kg" required />
+        @error('name') <span class="form-error">{{ $message }}</span> @enderror
     </div>
 
     <div class="form-row">
         <div class="form-group">
             <label class="form-label">SKU / Kode Produk</label>
-            <input type="text"
-                   class="form-control"
-                   value="{{ $product->id ?? 'auto-generate' }}"
-                   placeholder="Auto-generate"
-                   disabled />
-            <span class="form-hint">Kode unik produk</span>
+            <input type="text" class="form-control" value="{{ $product->id ?? 'auto-generate' }}" disabled />
         </div>
-
         <div class="form-group">
             <label class="form-label">Kategori</label>
-            <input type="text"
-                   name="category"
-                   class="form-control @error('category') is-invalid @enderror"
-                   value="{{ old('category', $product->category ?? '') }}"
-                   placeholder="Mis: Makanan" />
-            @error('category')
-                <span class="form-error">{{ $message }}</span>
-            @enderror
+            <input type="text" name="category" class="form-control @error('category') is-invalid @enderror"
+                   value="{{ old('category', $product->category ?? '') }}" placeholder="Mis: Makanan" />
+            @error('category') <span class="form-error">{{ $message }}</span> @enderror
         </div>
     </div>
 
@@ -59,31 +33,15 @@
     <div class="form-row">
         <div class="form-group">
             <label class="form-label">Harga <span class="required">*</span></label>
-            <input type="number"
-                   name="price"
-                   class="form-control @error('price') is-invalid @enderror"
-                   value="{{ old('price', $product->price ?? '') }}"
-                   placeholder="0"
-                   min="0"
-                   step="0.01"
-                   required />
-            @error('price')
-                <span class="form-error">{{ $message }}</span>
-            @enderror
+            <input type="number" name="price" class="form-control @error('price') is-invalid @enderror"
+                   value="{{ old('price', $product->price ?? '') }}" placeholder="0" min="0" required />
+            @error('price') <span class="form-error">{{ $message }}</span> @enderror
         </div>
-
         <div class="form-group">
             <label class="form-label">Stok <span class="required">*</span></label>
-            <input type="number"
-                   name="stock"
-                   class="form-control @error('stock') is-invalid @enderror"
-                   value="{{ old('stock', $product->stock ?? '') }}"
-                   placeholder="0"
-                   min="0"
-                   required />
-            @error('stock')
-                <span class="form-error">{{ $message }}</span>
-            @enderror
+            <input type="number" name="stock" class="form-control @error('stock') is-invalid @enderror"
+                   value="{{ old('stock', $product->stock ?? '') }}" placeholder="0" min="0" required />
+            @error('stock') <span class="form-error">{{ $message }}</span> @enderror
         </div>
     </div>
 
@@ -92,62 +50,60 @@
 
     <div class="form-group">
         <label class="form-label">Deskripsi Produk</label>
-        <textarea name="description"
-                  class="form-control @error('description') is-invalid @enderror"
+        <textarea name="description" class="form-control @error('description') is-invalid @enderror"
                   placeholder="Deskripsi singkat produk...">{{ old('description', $product->description ?? '') }}</textarea>
-        @error('description')
-            <span class="form-error">{{ $message }}</span>
-        @enderror
+        @error('description') <span class="form-error">{{ $message }}</span> @enderror
     </div>
 
-    <div class="form-group">
+    {{-- GAMBAR --}}
+     <div class="form-group">
         <label class="form-label">Gambar Produk</label>
+
         @if(isset($product) && $product->image)
-            <div style="margin-bottom: 10px;">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="Preview" style="max-height: 100px; border-radius: 8px;">
+            <div id="preview-container" style="position: relative; display: inline-block; margin-bottom: 10px;">
+                <img id="image-preview" src="{{ asset('storage/' . $product->image) }}" alt="Preview" style="max-height: 120px; border-radius: 8px; border: 1px solid var(--border);">
+
+                {{-- Tombol Silang (X) --}}
+                <button type="button" id="btn-remove-image" title="Hapus Gambar"
+                        style="position: absolute; top: -8px; right: -8px; width: 24px; height: 24px; background: var(--red); color: white; border: none; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                    <i class="ti ti-x"></i>
+                </button>
+
+                {{-- Input Hidden untuk kirim sinyal hapus ke Controller --}}
+                <input type="hidden" name="remove_image" id="remove-image-flag" value="0">
             </div>
         @endif
-        <input type="file" name="image" class="form-control" accept="image/*">
+
+        <input type="file" name="image" class="form-control" accept="image/*" id="input-image">
         <span class="form-hint">Format: JPG, PNG. Max: 2MB</span>
+        @error('image') <span class="form-error">{{ $message }}</span> @enderror
     </div>
 
-    <div class="form-group" style="margin-bottom: 0;">
-        <label class="form-label">Status</label>
-        <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px;">
-            <input type="checkbox"
-                   name="is_active"
-                   id="is_active"
-                   value="1"
-                   @checked(old('is_active', $product->is_active ?? true))
-                   style="width: 18px; height: 18px; accent-color: var(--primary);" />
-            <label for="is_active" style="font-size: 13.5px; color: var(--text-2); cursor: pointer;">
-                Produk aktif & bisa dijual
-            </label>
-        </div>
-    </div>
 
+    {{-- TOMBOL SUBMIT --}}
+    <div style="display: flex; justify-content: flex-end; gap: 8px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-soft);">
+        <a href="{{ route('admin.products.index') }}" class="btn btn-outline">
+            <i class="ti ti-x"></i> Batal
+        </a>
+        <button type="submit" class="btn btn-primary">
+            <i class="ti ti-device-floppy"></i> {{ $button ?? 'Simpan Produk' }}
+        </button>
+    </div>
 </form>
 
-<style>
-    .section-label {
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: var(--text-3);
-        letter-spacing: 0.05em;
-        margin: 20px 0 12px;
-    }
-    .section-label:first-child { margin-top: 0; }
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const btnRemove = document.getElementById('btn-remove-image');
+        const previewContainer = document.getElementById('preview-container');
+        const removeFlag = document.getElementById('remove-image-flag');
 
-    .form-error {
-        display: block;
-        font-size: 12px;
-        color: var(--red);
-        margin-top: 4px;
-    }
-
-    .form-control.is-invalid {
-        border-color: var(--red);
-        box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
-    }
-</style>
+        if (btnRemove) {
+            btnRemove.addEventListener('click', function () {
+                // Sembunyikan gambar
+                previewContainer.style.display = 'none';
+                // Set nilai hidden input jadi 1 (berarti hapus)
+                removeFlag.value = '1';
+            });
+        }
+    });
+</script>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class TransactionController extends Controller
 {
@@ -76,4 +78,19 @@ class TransactionController extends Controller
             ->route('admin.transaksi.index')
             ->with('success', 'Transaksi ' . $transaction->code . ' berhasil dibatalkan.');
     }
+
+
+
+    public function downloadPdf(Transaction $transaction) {
+
+        $transaction->load('items', 'user');
+
+        $pdf = Pdf::loadView('admin.pages.transaksi.pdf', compact('transaction'));
+
+        $pdf->setPaper('A4', 'portrait');
+
+         return $pdf->download('Invoice_' . $transaction->code . '.pdf');
+    }
+
+
 }

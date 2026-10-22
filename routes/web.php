@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function (){
      Route::prefix('transaksi')->name('transaksi.')->group(function () {
         Route::get('/', [TransactionController::class, 'index'])->name('index');
         Route::get('/{transaction}', [TransactionController::class, 'show'])->name('show');
+        Route::get('/{transaction}/pdf', [TransactionController::class, 'downloadPdf'])->name('pdf');
         Route::delete('/{transaction}', [TransactionController::class, 'destroy'])->name('destroy');
         });
 

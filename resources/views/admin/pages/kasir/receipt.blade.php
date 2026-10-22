@@ -287,6 +287,9 @@
         <button type="button" class="btn btn-primary" onclick="window.print()">
             🖨️ Cetak Struk
         </button>
+        <a href="{{ route('admin.transaksi.pdf', $transaction) }}" class="btn btn-primary">
+            <i class="ti ti-file-download"></i> Download Invoice PDF
+        </a>
         <a href="{{ route('admin.kasir.index') }}" class="btn btn-outline">
             ← Kasir Lagi
         </a>
